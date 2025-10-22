@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invierno 85 - Página Principal</title>
+    <style>
+        :root {
+            --coral-red: #FF6B6B;
+            --black: #2D2D2D;
+            --cream: #F7F7E8;
+            --metallic-gray: #8A8A8A;
+            --mint-green: #C7E9C0;
+            --fuchsia: #FF4D94;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--mint-green);
+            color: var(--black);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--coral-red), var(--fuchsia));
+            color: var(--cream);
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .logo {
+            font-size: 4rem;
+            font-weight: bold;
+            text-shadow: 3px 3px 0 var(--black);
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .decades {
+            color: var(--fuchsia);
+            background-color: var(--cream);
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Navigation */
+        .nav-container {
+            background-color: var(--black);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav li {
+            margin: 0 15px;
+        }
+        
+        nav a {
+            color: var(--cream);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--coral-red);
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 50px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--coral-red);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 3px;
+            background-color: var(--coral-red);
+            margin: 10px auto;
+        }
+        
+        /* Versions Section */
+        .versions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .version-card {
+            background-color: var(--cream);
+            border-radius: 10px;
+            overflow: hidden;
+            width: 300px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .version-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .version-image {
+            height: 180px;
+            background-color: var(--metallic-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cream);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .version-1 .version-image {
+            background: linear-gradient(45deg, var(--coral-red), var(--fuchsia));
+        }
+        
+        .version-2 .version-image {
+            background: linear-gradient(45deg, var(--metallic-gray), var(--black));
+        }
+        
+        .version-3 .version-image {
+            background: linear-gradient(45deg, var(--mint-green), var(--cream));
+            color: var(--black);
+        }
+        
+        .version-content {
+            padding: 20px;
+        }
+        
+        .version-title {
+            color: var(--coral-red);
+            margin-bottom: 10px;
+        }
+        
+        .version-description {
+            color: var(--black);
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--coral-red);
+            color: var(--cream);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--fuchsia);
+        }
+        
+        /* Info Section */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .info-card {
+            background-color: var(--cream);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .info-card h3 {
+            color: var(--coral-red);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-card h3 i {
+            margin-right: 10px;
+        }
+        
+        /* Contact Section */
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .contact-item {
+            background-color: var(--cream);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .contact-item i {
+            font-size: 2rem;
+            color: var(--coral-red);
+            margin-bottom: 15px;
+        }
+        
+        /* Events Section */
+        .events {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .event-card {
+            background-color: var(--cream);
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .event-date {
+            background-color: var(--coral-red);
+            color: var(--cream);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 60px;
+        }
+        
+        .gallery-item {
+            height: 150px;
+            background-color: var(--metallic-gray);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cream);
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--black);
+            color: var(--cream);
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: var(--cream);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--coral-red);
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--metallic-gray);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 5px 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1 class="logo">INVIERNO 85</h1>
+            <p class="tagline">La leyenda continúa...</p>
+            <div class="decades">60's 70's 80's y algo más...</div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="container">
+            <nav>
+                <ul>
+                    <li><a href="#versions">Versiones</a></li>
+                    <li><a href="#info">Información</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                    <li><a href="#events">Eventos</a></li>
+                    <li><a href="#gallery">Galería</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content container">
+        <!-- Versions Section -->
+        <section id="versions">
+            <h2 class="section-title">Versiones del Sitio</h2>
+            <div class="versions">
+                <div class="version-card version-1">
+                    <div class="version-image">VERSIÓN 1</div>
+                    <div class="version-content">
+                        <h3 class="version-title">Estilo Clásico</h3>
+                        <p class="version-description">Una presentación nostálgica con elementos visuales que evocan los años 80.</p>
+                        <a href="index1.html" class="btn">Ver Versión</a>
+                    </div>
+                </div>
+                
+                <div class="version-card version-2">
+                    <div class="version-image">VERSIÓN 2</div>
+                    <div class="version-content">
+                        <h3 class="version-title">Estilo Moderno</h3>
+                        <p class="version-description">Un diseño contemporáneo con elementos interactivos y visuales impactantes.</p>
+                        <a href="index2.html" class="btn">Ver Versión</a>
+                    </div>
+                </div>
+                
+                <div class="version-card version-3">
+                    <div class="version-image">VERSIÓN 3</div>
+                    <div class="version-content">
+                        <h3 class="version-title">Estilo Minimalista</h3>
+                        <p class="version-description">Una aproximación limpia y directa que prioriza la información esencial.</p>
+                        <a href="https://inviernopesado-web-starter.lovable.app" class="btn">Ver Versión</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Information Section -->
+        <section id="info">
+            <h2 class="section-title">Información General</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><i class="fas fa-music"></i> Sobre la Banda</h3>
+                    <p>Invierno 85 es una banda con un repertorio versátil en inglés y español, que revive la esencia musical de los años 60, 70 y 80 con un toque contemporáneo.</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3><i class="fas fa-users"></i> Integrantes</h3>
+                    <p>Formación versátil con músicos talentosos que se adaptan a cada presentación, manteniendo siempre la calidad y energía que caracteriza a Invierno 85.</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3><i class="fas fa-guitar"></i> Estilo Musical</h3>
+                    <p>Nuestra música combina lo mejor del rock clásico, pop retro y baladas inolvidables, creando una experiencia sonora que trasciende generaciones.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2 class="section-title">Contacto y Contrataciones</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Teléfono / WhatsApp</h3>
+                    <p>+52 55 2884 5182</p>
+                    <a href="https://wa.me/525528845182" class="btn" style="margin-top: 10px;">Enviar Mensaje</a>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Disponibilidad</h3>
+                    <p>La banda está disponible para eventos privados, fiestas y presentaciones especiales.</p>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Contáctanos</h3>
+                    <p>Para contrataciones y más información, no dudes en comunicarte con nosotros.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Events Section -->
+        <section id="events">
+            <h2 class="section-title">Próximos Eventos</h2>
+            <div class="events">
+                <div class="event-card">
+                    <div class="event-date">15 NOV 2023</div>
+                    <h3>Fiesta Retro</h3>
+                    <p>Centro Cultural de la Ciudad</p>
+                    <p>20:00 hrs</p>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-date">30 NOV 2023</div>
+                    <h3>Noche de Rock Clásico</h3>
+                    <p>Bar "El Rincón del Recuerdo"</p>
+                    <p>22:00 hrs</p>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-date">15 DIC 2023</div>
+                    <h3>Fiesta Navideña</h3>
+                    <p>Salón de Eventos "Los Arcos"</p>
+                    <p>19:00 hrs</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery">
+            <h2 class="section-title">Galería</h2>
+            <div class="gallery">
+                <div class="gallery-item">Foto 1</div>
+                <div class="gallery-item">Foto 2</div>
+                <div class="gallery-item">Foto 3</div>
+                <div class="gallery-item">Foto 4</div>
+                <div class="gallery-item">Foto 5</div>
+                <div class="gallery-item">Foto 6</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h2>INVIERNO 85</h2>
+            <p>Música con pasado versátil en inglés y español</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            
+            <p class="copyright">© 2023 Invierno 85. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Invierno 85 — Sitio Oficial</title>
+  <meta name="description" content="Invierno 85 — La leyenda continúa. Música en inglés y español. Contrataciones y próximos eventos."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Oswald:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --coral:#ff4e50;           /* Rojo coral (texto principal y acentos) */
+      --black:#0b0b0d;           /* Negro (sombra/contraste) */
+      --white:#ffffff;           /* Blanco */
+      --cream:#f6f2ea;           /* Crema sutil (detalles) */
+      --metal:#9aa3a8;           /* Gris metálico (iconos/micrófono) */
+      --mint:#d8fff2;            /* Verde menta claro (fondo retro) */
+      --fuchsia:#ff2e83;         /* Rosa fuerte / fucsia (lema 60s/70s/80s) */
+      --bg:var(--mint);
+      --text:#1c1c1c;
+      --shadow:0 8px 30px rgba(0,0,0,.12);
+      --radius:18px;
+    }
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1120px,92%);margin:auto}
+
+    /* Navbar */
+    .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:saturate(150%) blur(8px);box-shadow:var(--shadow)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:.8rem 0}
+    .brand{display:flex;gap:.6rem;align-items:center;font-weight:800;letter-spacing:.5px}
+    .brand .logo{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 30% 30%, var(--coral), var(--fuchsia));box-shadow:inset 0 0 0 3px #fff, 0 4px 14px rgba(0,0,0,.15)}
+    .brand .name{font-family:Oswald,Montserrat,sans-serif;font-size:1.25rem}
+    .brand .name span{color:var(--coral);text-shadow:1px 1px 0 var(--black)}
+    .nav-links{display:flex;gap:1rem;font-weight:600}
+    .nav-links a{padding:.5rem .8rem;border-radius:12px}
+    .nav-links a:hover{background:rgba(0,0,0,.05)}
+    .burger{display:none;background:none;border:none;font-size:1.5rem}
+
+    /* Hero */
+    .hero{position:relative;isolation:isolate;}
+    .hero .bg{
+      position:absolute;inset:0;z-index:-1;
+      background:radial-gradient(1200px 500px at 80% 10%, rgba(255,78,80,.25), transparent 60%),
+                  radial-gradient(800px 400px at 10% 90%, rgba(255,46,131,.22), transparent 55%),
+                  linear-gradient(180deg, #ffffff, var(--bg));
+    }
+    .hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;align-items:center;padding:5rem 0}
+    .badge{display:inline-flex;gap:.5rem;align-items:center;background:#fff;border-radius:999px;padding:.4rem .8rem;border:1px solid #eee;box-shadow:var(--shadow)}
+    .badge .dot{width:8px;height:8px;border-radius:50%;background:var(--fuchsia)}
+    .title{font-family:Oswald,Montserrat,sans-serif;font-size:clamp(2rem,6vw,4.2rem);line-height:1.04;margin:.6rem 0}
+    .title .inv{color:var(--coral);text-shadow:2px 2px 0 var(--black)}
+    .subtitle{font-weight:600;color:#333}
+    .tagline{color:var(--fuchsia);font-weight:800;letter-spacing:.5px;margin:.75rem 0}
+    .cta{display:flex;gap:1rem;flex-wrap:wrap;margin:1.2rem 0}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 1.1rem;border-radius:14px;border:2px solid transparent;font-weight:800;box-shadow:var(--shadow)}
+    .btn.primary{background:var(--coral);color:#fff}
+    .btn.secondary{background:#fff;border-color:#eee}
+
+    .poster{background:linear-gradient(180deg,#fff, #f8fafc);border-radius:var(--radius);box-shadow:var(--shadow);padding:1rem;position:relative}
+    .poster::after{content:"";position:absolute;inset:0;border-radius:var(--radius);box-shadow:inset 0 0 0 2px rgba(0,0,0,.05);pointer-events:none}
+    .poster-art{aspect-ratio:4/3;background:linear-gradient(120deg, #222 10%, #444 30%, #222 90%);border-radius:14px;display:grid;place-items:center;color:#fff;letter-spacing:1px;text-transform:uppercase}
+    .poster-art span{opacity:.9}
+
+    /* Sections */
+    section{padding:3.5rem 0}
+    h2{font-family:Oswald,Montserrat,sans-serif;font-size:clamp(1.6rem,4vw,2.2rem)}
+    .muted{color:#555}
+
+    /* Bio */
+    .bio{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem}
+    .card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem}
+
+    /* Music */
+    .music-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+    .video{aspect-ratio:16/9;border:0;width:100%;border-radius:14px;box-shadow:var(--shadow)}
+    .empty{border:2px dashed #d6d6d6;border-radius:14px;display:grid;place-items:center;min-height:160px;background:linear-gradient(180deg,#fff,#fcfcfc)}
+
+    /* Gallery */
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:10px}
+    .grid .g1{grid-column:span 6}
+    .grid .g2{grid-column:span 3}
+    .grid .item{border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
+    .grid .ph{aspect-ratio:3/2;background:linear-gradient(135deg,#eee,#ddd)}
+
+    /* Events */
+    .events{display:grid;gap:1rem}
+    .event{background:#fff;border-radius:16px;padding:1rem;box-shadow:var(--shadow);display:flex;gap:1rem;align-items:center}
+    .event .date{background:var(--black);color:#fff;border-radius:12px;min-width:72px;text-align:center;padding:.4rem .6rem}
+    .event .date .d{display:block;font-size:1.3rem;font-weight:800}
+    .event .date .m{font-size:.8rem;opacity:.9}
+    .event .where{font-weight:700}
+
+    /* Contact */
+    .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+    form{display:grid;gap:.8rem}
+    input, textarea{background:#fff;border:1.5px solid #e8e8e8;border-radius:12px;padding:.8rem .9rem;font:inherit}
+    textarea{min-height:120px}
+    .help{font-size:.9rem;color:#666}
+
+    /* Footer */
+    footer{padding:2rem 0;color:#444}
+    .social{display:flex;gap:.8rem;flex-wrap:wrap}
+    .chip{background:#fff;border:1px solid #eee;border-radius:999px;padding:.5rem .9rem;display:inline-flex;gap:.5rem;align-items:center}
+    .chip .dot{width:8px;height:8px;border-radius:50%;background:var(--metal)}
+
+    /* Responsive */
+    @media (max-width: 960px){
+      .hero .wrap{grid-template-columns:1fr; padding:3rem 0}
+      .bio{grid-template-columns:1fr}
+      .music-wrap{grid-template-columns:1fr}
+      .grid .g1{grid-column:span 12}
+      .grid .g2{grid-column:span 6}
+      .contact-wrap{grid-template-columns:1fr}
+    }
+    @media (max-width: 760px){
+      .nav-links{display:none}
+      .burger{display:block}
+      .nav.open .nav-links{display:flex;flex-direction:column;position:absolute;left:0;right:0;top:100%;background:#fff;padding:1rem;border-bottom:1px solid #eee}
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav" id="top">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="Inicio">
+        <span class="logo" aria-hidden="true"></span>
+        <span class="name"><span>Invierno</span> 85</span>
+      </a>
+      <button class="burger" aria-label="Menú" onclick="document.querySelector('.nav').classList.toggle('open')">☰</button>
+      <div class="nav-links">
+        <a href="#bio">Biografía</a>
+        <a href="#musica">Música</a>
+        <a href="#fotos">Fotos</a>
+        <a href="#eventos">Eventos</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="bg"></div>
+    <div class="container wrap">
+      <div>
+        <div class="badge"><span class="dot"></span><span>Disponible para eventos</span></div>
+        <h1 class="title"><span class="inv">Invierno</span> 85</h1>
+        <p class="subtitle">Música versátil en inglés y español. <strong>La leyenda continúa</strong>.</p>
+        <p class="tagline">60's • 70's • 80's y algo más…</p>
+        <div class="cta">
+          <a class="btn primary" href="https://wa.me/525528845182?text=Hola%20Invierno%2085%2C%20quiero%20pedir%20informes%20para%20contratarlos" target="_blank" rel="noopener">📲 Contrataciones</a>
+          <a class="btn secondary" href="#eventos">📅 Próximos eventos</a>
+        </div>
+      </div>
+      <div class="poster">
+        <div class="poster-art">
+          <span>Portada de la banda / logo</span>
+        </div>
+        <p class="muted" style="margin:.8rem 0 0 .2rem">*Reemplaza esta imagen por tu logotipo o foto de escenario.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- BIO -->
+  <section id="bio" class="container">
+    <h2>Biografía</h2>
+    <div class="bio">
+      <div class="card">
+        <p>Invierno 85 es un proyecto musical de espíritu <strong>alegre, rockero y nostálgico</strong>, con repertorio versátil en inglés y español para todo tipo de eventos. La formación es flexible y se adapta a cada presentación.</p>
+        <p class="muted">Integrantes: rotativos (no fijos). No se muestran fotos individuales.</p>
+      </div>
+      <div class="card">
+        <ul>
+          <li><strong>Género/estilo:</strong> Versátil (inglés y español)</li>
+          <li><strong>Mensaje:</strong> La leyenda continúa — Grupo Invierno 85</li>
+          <li><strong>Ubicación:</strong> México</li>
+          <li><strong>Disponibilidad:</strong> Sí, para conciertos y eventos privados</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÚSICA & VIDEO -->
+  <section id="musica" class="container">
+    <h2>Música & Video</h2>
+    <p class="muted">Aún no hay canciones publicadas. Preparando canal de YouTube…</p>
+    <div class="music-wrap">
+      <div class="card">
+        <h3 style="margin-top:0">Video destacado</h3>
+        <div class="empty" id="videoBox">
+          <p style="margin:1rem;text-align:center">Coloca aquí el link de YouTube cuando esté listo.<br>
+            <small class="muted">Ejemplo de URL: https://www.youtube.com/watch?v=XXXXXXXX</small>
+          </p>
+        </div>
+        <div style="display:flex;gap:.5rem;margin-top:.6rem">
+          <input id="ytUrl" type="url" placeholder="Pega enlace de YouTube" style="flex:1"/>
+          <button class="btn" onclick="embedVideo()">Insertar</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Próximamente en plataformas</h3>
+        <div class="empty"><p style="margin:1rem;text-align:center">Spotify • Apple Music • YouTube Music</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOTOS -->
+  <section id="fotos" class="container">
+    <h2>Galería</h2>
+    <p class="muted">Sube fotos de presentaciones anteriores. Puedes reemplazar los cuadros siguientes por tus imágenes.</p>
+    <div class="grid">
+      <div class="item g1"><div class="ph" title="Foto grande 1"></div></div>
+      <div class="item g2"><div class="ph" title="Foto 2"></div></div>
+      <div class="item g2"><div class="ph" title="Foto 3"></div></div>
+      <div class="item g2"><div class="ph" title="Foto 4"></div></div>
+      <div class="item g1"><div class="ph" title="Foto grande 5"></div></div>
+      <div class="item g2"><div class="ph" title="Foto 6"></div></div>
+      <div class="item g2"><div class="ph" title="Foto 7"></div></div>
+      <div class="item g2"><div class="ph" title="Foto 8"></div></div>
+    </div>
+  </section>
+
+  <!-- EVENTOS -->
+  <section id="eventos" class="container">
+    <h2>Próximos eventos</h2>
+    <div class="events">
+      <div class="event">
+        <div class="date"><span class="d">15</span><span class="m">NOV</span></div>
+        <div>
+          <div class="where">Gran Noche Retro — CDMX</div>
+          <div class="muted">Lugar por confirmar • 9:00 PM</div>
+        </div>
+        <div style="margin-left:auto"><a class="btn secondary" href="#contacto">Solicitar info</a></div>
+      </div>
+      <div class="event">
+        <div class="date"><span class="d">30</span><span class="m">NOV</span></div>
+        <div>
+          <div class="where">Evento privado</div>
+          <div class="muted">Contrata a Invierno 85 para tu fiesta</div>
+        </div>
+        <div style="margin-left:auto"><a class="btn secondary" href="https://wa.me/525528845182" target="_blank" rel="noopener">WhatsApp</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="container">
+    <h2>Contacto</h2>
+    <div class="contact-wrap">
+      <div class="card">
+        <p><strong>Contrataciones por WhatsApp:</strong> <a href="https://wa.me/525528845182" target="_blank" rel="noopener">+52 55 2884 5182</a></p>
+        <p class="muted">No hay correo electrónico registrado por ahora.</p>
+        <div style="margin:.8rem 0 1rem" class="social">
+          <a class="chip" href="#" title="Facebook (agregar más tarde)"><span class="dot"></span>Facebook</a>
+          <a class="chip" href="#" title="Instagram (agregar más tarde)"><span class="dot"></span>Instagram</a>
+          <a class="chip" href="#" title="TikTok (agregar más tarde)"><span class="dot"></span>TikTok</a>
+          <a class="chip" href="#" title="YouTube (agregar más tarde)"><span class="dot"></span>YouTube</a>
+        </div>
+        <p class="help">¿Quieres que los mensajes lleguen con texto prellenado? Usa el formulario y abre WhatsApp:</p>
+        <form onsubmit="return sendWhatsApp()">
+          <input id="name" placeholder="Tu nombre" required>
+          <textarea id="msg" placeholder="Cuéntanos de tu evento (fecha, lugar, tipo de evento)" required></textarea>
+          <button class="btn primary" type="submit">Enviar a WhatsApp</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Detalles técnicos</h3>
+        <ul>
+          <li>Diseño responsivo (móvil y escritorio)</li>
+          <li>Secciones: Biografía, Música/Video, Fotos, Eventos y Contacto</li>
+          <li>Paleta: coral, fucsia, menta, negro, blanco/crema, metal</li>
+          <li>Fácil de publicar en cualquier hosting o GitHub Pages</li>
+        </ul>
+        <p class="muted">Cuando nos compartas el logotipo, reemplazaremos los marcadores visuales y afinaremos la portada.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap">
+      <div>© <span id="year"></span> Invierno 85. Todos los derechos reservados.</div>
+      <a class="btn secondary" href="#top">↑ Volver arriba</a>
+    </div>
+  </footer>
+
+  <script>
+    // Año actual
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Inserta video de YouTube
+    function embedVideo(){
+      const url = document.getElementById('ytUrl').value.trim();
+      if(!url) return;
+      const id = extractYouTubeID(url);
+      const box = document.getElementById('videoBox');
+      if(id){
+        box.innerHTML = `<iframe class="video" src="https://www.youtube.com/embed/${id}" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+      } else {
+        alert('No pude reconocer ese enlace de YouTube.');
+      }
+    }
+    function extractYouTubeID(u){
+      try{
+        const a = new URL(u);
+        if(a.hostname.includes('youtu.be')) return a.pathname.slice(1);
+        if(a.searchParams.get('v')) return a.searchParams.get('v');
+        const paths = a.pathname.split('/');
+        const idx = paths.indexOf('embed');
+        if(idx>-1) return paths[idx+1];
+      }catch(e){return null}
+      return null;
+    }
+
+    // Enviar a WhatsApp con texto
+    function sendWhatsApp(){
+      const name = document.getElementById('name').value.trim();
+      const msg = document.getElementById('msg').value.trim();
+      const phone = '525528845182';
+      const text = encodeURIComponent(`Hola, soy ${name}. Me interesa contratar a Invierno 85. Detalles: ${msg}`);
+      const url = `https://wa.me/${phone}?text=${text}`;
+      window.open(url,'_blank');
+      return false;
+    }
+  </script>
+</body>
+</html>
