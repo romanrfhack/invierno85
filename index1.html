@@ -1,680 +1,328 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invierno 85 - La leyenda continúa</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Variables de colores según el logo */
-        :root {
-            --verde-menta: #b8e6d4;
-            --rojo-coral: #ff6b6b;
-            --negro: #222222;
-            --blanco: #ffffff;
-            --crema: #f5f5dc;
-            --gris-metalico: #7d7d7d;
-            --rosa-fucsia: #ff4081;
-        }
-        
-        /* Estilos generales */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--verde-menta);
-            color: var(--negro);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        section {
-            padding: 60px 0;
-            position: relative;
-        }
-        
-        h1, h2, h3 {
-            margin-bottom: 20px;
-        }
-        
-        h1 {
-            font-size: 3rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        h2 {
-            font-size: 2.2rem;
-            border-bottom: 2px solid var(--rojo-coral);
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-        }
-        
-        p {
-            margin-bottom: 15px;
-        }
-        
-        /* Header y navegación */
-        header {
-            background-color: var(--negro);
-            color: var(--blanco);
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s;
-        }
-        
-        header.scrolled {
-            background-color: rgba(34, 34, 34, 0.95);
-            padding: 15px 0;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--rojo-coral);
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            justify-content: center;
-        }
-        
-        nav ul li {
-            margin: 0 15px;
-        }
-        
-        nav ul li a {
-            color: var(--blanco);
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-            position: relative;
-        }
-        
-        nav ul li a:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--rojo-coral);
-            transition: width 0.3s;
-        }
-        
-        nav ul li a:hover {
-            color: var(--rojo-coral);
-        }
-        
-        nav ul li a:hover:after {
-            width: 100%;
-        }
-        
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--blanco);
-            margin-top: 80px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-content h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            color: var(--rojo-coral);
-            animation: fadeInDown 1.5s ease-out;
-        }
-        
-        .hero-content p {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            color: var(--rosa-fucsia);
-            animation: fadeInUp 1.5s ease-out 0.5s both;
-        }
-        
-        .hero-btn {
-            display: inline-block;
-            background-color: var(--rojo-coral);
-            color: var(--blanco);
-            padding: 12px 25px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-            margin-top: 15px;
-            animation: fadeIn 1.5s ease-out 1s both;
-        }
-        
-        .hero-btn:hover {
-            background-color: var(--rosa-fucsia);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Biografía */
-        .bio {
-            background: linear-gradient(rgba(245, 245, 220, 0.9), rgba(245, 245, 220, 0.9)), url('https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80') center/cover no-repeat;
-            padding: 80px 0;
-        }
-        
-        .bio-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        /* Música */
-        .music {
-            text-align: center;
-            background: linear-gradient(rgba(184, 230, 212, 0.9), rgba(184, 230, 212, 0.9)), url('https://images.unsplash.com/photo-1571974599782-87624638275f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1931&q=80') center/cover no-repeat;
-        }
-        
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 */
-            height: 0;
-            overflow: hidden;
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: var(--negro);
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transform: translateY(50px);
-            opacity: 0;
-            transition: all 0.8s ease;
-        }
-        
-        .video-container.visible {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-        }
-        
-        .coming-soon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--blanco);
-            font-size: 1.5rem;
-            text-align: center;
-        }
-        
-        /* Galería */
-        .gallery {
-            background: linear-gradient(rgba(245, 245, 220, 0.9), rgba(245, 245, 220, 0.9)), url('https://images.unsplash.com/photo-1506157786151-b8491531f063?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
-        }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-        }
-        
-        .gallery-item {
-            height: 200px;
-            background-color: var(--gris-metalico);
-            border-radius: 5px;
-            overflow: hidden;
-            position: relative;
-            transform: scale(0.9);
-            opacity: 0;
-            transition: all 0.5s ease;
-        }
-        
-        .gallery-item.visible {
-            transform: scale(1);
-            opacity: 1;
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-        
-        .gallery-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.7));
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .gallery-item:hover::after {
-            opacity: 1;
-        }
-        
-        /* Eventos */
-        .events {
-            background: linear-gradient(rgba(184, 230, 212, 0.9), rgba(184, 230, 212, 0.9)), url('https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
-        }
-        
-        .events-list {
-            display: grid;
-            gap: 20px;
-        }
-        
-        .event-item {
-            background-color: var(--blanco);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            transform: translateX(-50px);
-            opacity: 0;
-        }
-        
-        .event-item.visible {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        
-        .event-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .event-date {
-            font-weight: bold;
-            color: var(--rojo-coral);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .event-date i {
-            margin-right: 10px;
-        }
-        
-        /* Contacto */
-        .contact {
-            background: linear-gradient(rgba(245, 245, 220, 0.9), rgba(245, 245, 220, 0.9)), url('https://images.unsplash.com/photo-1527525443983-6e60c75fff46?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2085&q=80') center/cover no-repeat;
-        }
-        
-        .contact-info {
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .contact-button {
-            display: inline-block;
-            background-color: var(--rojo-coral);
-            color: var(--blanco);
-            padding: 12px 25px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-            margin-top: 15px;
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-        }
-        
-        .contact-button:hover {
-            background-color: var(--rosa-fucsia);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
-        }
-        
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #25D366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            z-index: 100;
-            transition: all 0.3s;
-            animation: pulse 2s infinite;
-        }
-        
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--negro);
-            color: var(--blanco);
-            padding: 40px 0;
-            text-align: center;
-        }
-        
-        .social-links {
-            margin: 20px 0;
-        }
-        
-        .social-links a {
-            color: var(--blanco);
-            margin: 0 10px;
-            font-size: 1.5rem;
-            transition: all 0.3s;
-            display: inline-block;
-        }
-        
-        .social-links a:hover {
-            color: var(--rojo-coral);
-            transform: translateY(-5px);
-        }
-        
-        /* Animaciones */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-        
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-            }
-        }
-        
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-        
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            h2 {
-                font-size: 1.8rem;
-            }
-            
-            .hero-content h1 {
-                font-size: 3rem;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            nav ul li {
-                margin: 10px 0;
-            }
-            
-            .whatsapp-float {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
-                bottom: 20px;
-                right: 20px;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Invierno 85 — Sitio Oficial</title>
+  <meta name="description" content="Invierno 85 — La leyenda continúa. Música en inglés y español. Contrataciones y próximos eventos."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Oswald:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --coral:#ff4e50; --black:#0b0b0d; --white:#ffffff; --cream:#f6f2ea;
+      --metal:#9aa3a8; --mint:#d8fff2; --fuchsia:#ff2e83; --bg:var(--mint);
+      --text:#1c1c1c; --shadow:0 8px 30px rgba(0,0,0,.12); --radius:18px;
+    }
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1120px,92%);margin:auto}
+
+    /* Navbar */
+    .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:saturate(150%) blur(8px);box-shadow:var(--shadow)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:.6rem 0}
+    .brand{display:flex;gap:.7rem;align-items:center;font-weight:800;letter-spacing:.5px}
+    .brand img{height:44px;width:auto;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,.18))}
+    .brand .name{font-family:Oswald,Montserrat,sans-serif;font-size:1.2rem;line-height:1}
+    .brand .name span{color:var(--coral);text-shadow:1px 1px 0 var(--black)}
+    .nav-links{display:flex;gap:1rem;font-weight:600}
+    .nav-links a{padding:.5rem .8rem;border-radius:12px}
+    .nav-links a:hover{background:rgba(0,0,0,.05)}
+    .burger{display:none;background:none;border:none;font-size:1.5rem}
+
+    /* Hero */
+    .hero{position:relative;isolation:isolate;}
+    .hero .bg{
+      position:absolute;inset:0;z-index:-1;
+      background:radial-gradient(1200px 500px at 80% 10%, rgba(255,78,80,.25), transparent 60%),
+                  radial-gradient(800px 400px at 10% 90%, rgba(255,46,131,.22), transparent 55%),
+                  linear-gradient(180deg, #ffffff, var(--bg));
+    }
+    .hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;align-items:center;padding:5rem 0}
+    .badge{display:inline-flex;gap:.5rem;align-items:center;background:#fff;border-radius:999px;padding:.4rem .8rem;border:1px solid #eee;box-shadow:var(--shadow)}
+    .badge .dot{width:8px;height:8px;border-radius:50%;background:var(--fuchsia)}
+    .title{font-family:Oswald,Montserrat,sans-serif;font-size:clamp(2rem,6vw,4.2rem);line-height:1.04;margin:.6rem 0}
+    .title .inv{color:var(--coral);text-shadow:2px 2px 0 var(--black)}
+    .subtitle{font-weight:600;color:#333}
+    .tagline{color:var(--fuchsia);font-weight:800;letter-spacing:.5px;margin:.75rem 0}
+    .cta{display:flex;gap:1rem;flex-wrap:wrap;margin:1.2rem 0}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 1.1rem;border-radius:14px;border:2px solid transparent;font-weight:800;box-shadow:var(--shadow)}
+    .btn.primary{background:var(--coral);color:#fff}
+    .btn.secondary{background:#fff;border-color:#eee}
+
+    /* Poster con logo */
+    .poster{background:linear-gradient(180deg,#fff, #f8fafc);border-radius:var(--radius);box-shadow:var(--shadow);padding:1rem;position:relative}
+    .poster::after{content:"";position:absolute;inset:0;border-radius:var(--radius);box-shadow:inset 0 0 0 2px rgba(0,0,0,.05);pointer-events:none}
+    .poster-art{aspect-ratio:4/3;background:#fff;border-radius:14px;display:grid;place-items:center;overflow:hidden}
+    .poster-art img{width:100%;height:100%;object-fit:contain}
+
+    /* Sections */
+    section{padding:3.5rem 0}
+    h2{font-family:Oswald,Montserrat,sans-serif;font-size:clamp(1.6rem,4vw,2.2rem)}
+    .muted{color:#555}
+
+    /* Bio */
+    .bio{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem}
+    .card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem}
+
+    /* Music */
+    .music-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+    .video{aspect-ratio:16/9;border:0;width:100%;border-radius:14px;box-shadow:var(--shadow)}
+    .empty{border:2px dashed #d6d6d6;border-radius:14px;display:grid;place-items:center;min-height:160px;background:linear-gradient(180deg,#fff,#fcfcfc)}
+
+    /* Gallery */
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:10px}
+    .grid .g1{grid-column:span 6}
+    .grid .g2{grid-column:span 3}
+    .grid .item{border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
+    .grid .ph{aspect-ratio:3/2;background:linear-gradient(135deg,#eee,#ddd)}
+
+    /* Events */
+    .events{display:grid;gap:1rem}
+    .event{background:#fff;border-radius:16px;padding:1rem;box-shadow:var(--shadow);display:flex;gap:1rem;align-items:center}
+    .event .date{background:var(--black);color:#fff;border-radius:12px;min-width:72px;text-align:center;padding:.4rem .6rem}
+    .event .date .d{display:block;font-size:1.3rem;font-weight:800}
+    .event .date .m{font-size:.8rem;opacity:.9}
+    .event .where{font-weight:700}
+
+    /* Contact */
+    .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+    form{display:grid;gap:.8rem}
+    input, textarea{background:#fff;border:1.5px solid #e8e8e8;border-radius:12px;padding:.8rem .9rem;font:inherit}
+    textarea{min-height:120px}
+    .help{font-size:.9rem;color:#666}
+
+    /* Footer */
+    footer{padding:2rem 0;color:#444}
+    .social{display:flex;gap:.8rem;flex-wrap:wrap}
+    .chip{background:#fff;border:1px solid #eee;border-radius:999px;padding:.5rem .9rem;display:inline-flex;gap:.5rem;align-items:center}
+    .chip .dot{width:8px;height:8px;border-radius:50%;background:var(--metal)}
+
+    /* Responsive */
+    @media (max-width: 960px){
+      .hero .wrap{grid-template-columns:1fr; padding:3rem 0}
+      .bio{grid-template-columns:1fr}
+      .music-wrap{grid-template-columns:1fr}
+      .grid .g1{grid-column:span 12}
+      .grid .g2{grid-column:span 6}
+      .contact-wrap{grid-template-columns:1fr}
+      /* En móviles mostramos solo el logo para compactar */
+      .brand .name{display:none}
+    }
+    @media (max-width: 760px){
+      .nav-links{display:none}
+      .burger{display:block}
+      .nav.open .nav-links{display:flex;flex-direction:column;position:absolute;left:0;right:0;top:100%;background:#fff;padding:1rem;border-bottom:1px solid #eee}
+    }
+  </style>
 </head>
 <body>
-    <!-- WhatsApp Float -->
-    <a href="https://wa.me/525528845182" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+  <!-- NAV -->
+  <nav class="nav" id="top">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="Inicio">
+        <!-- LOGO de la misma carpeta -->
+        <img src="logoInvierno85.png" alt="Logo Invierno 85" />
+        <span class="name"><span>Invierno</span> 85</span>
+      </a>
+      <button class="burger" aria-label="Menú" onclick="document.querySelector('.nav').classList.toggle('open')">☰</button>
+      <div class="nav-links">
+        <a href="#bio">Biografía</a>
+        <a href="#musica">Música</a>
+        <a href="#fotos">Fotos</a>
+        <a href="#eventos">Eventos</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </div>
+  </nav>
 
-    <!-- Header y Navegación -->
-    <header id="header">
-        <div class="container">
-            <nav>
-                <ul>
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#bio">Biografía</a></li>
-                    <li><a href="#musica">Música</a></li>
-                    <li><a href="#fotos">Fotos</a></li>
-                    <li><a href="#eventos">Eventos</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
-                </ul>
-            </nav>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="bg"></div>
+    <div class="container wrap">
+      <div>
+        <div class="badge"><span class="dot"></span><span>Disponible para eventos</span></div>
+        <h1 class="title"><span class="inv">Invierno</span> 85</h1>
+        <p class="subtitle">Música versátil en inglés y español. <strong>La leyenda continúa</strong>.</p>
+        <p class="tagline">60's • 70's • 80's y algo más…</p>
+        <div class="cta">
+          <a class="btn primary" href="https://wa.me/525528845182?text=Hola%20Invierno%2085%2C%20quiero%20pedir%20informes%20para%20contratarlos" target="_blank" rel="noopener">📲 Contrataciones</a>
+          <a class="btn secondary" href="#eventos">📅 Próximos eventos</a>
         </div>
-    </header>
+      </div>
 
-    <!-- Hero Section / Portada -->
-    <section id="inicio" class="hero">
-        <div class="hero-content">
-            <h1>INVIERNO 85</h1>
-            <p>La leyenda continúa</p>
-            <p>Música con pasada versátil en inglés y español</p>
-            <a href="#musica" class="hero-btn">Descubre nuestra música</a>
+      <!-- TARJETA con LOGO grande -->
+      <div class="poster" aria-label="Portada con logotipo">
+        <div class="poster-art">
+          <img src="logoInvierno85.png" alt="Invierno 85 — Grupo versátil 60s 70s 80s y algo más">
         </div>
-    </section>
+        <!-- <p class="muted" style="margin:.8rem 0 0 .2rem">*El logotipo se toma de la misma carpeta.</p> -->
+      </div>
+    </div>
+  </header>
 
-    <!-- Biografía -->
-    <section id="bio" class="bio">
-        <div class="container">
-            <div class="bio-content fade-in">
-                <h2>Biografía</h2>
-                <p>Invierno 85 es una banda que revive la esencia de la música de los 60's, 70's, 80's y algo más, fusionando sonidos nostálgicos con energía rockera actual. Con un repertorio versátil en inglés y español, la banda transporta a su audiencia a través de décadas de buena música.</p>
-                <p>La formación de Invierno 85 es dinámica, adaptándose a cada presentación con músicos talentosos que comparten la misma pasación por la música con historia.</p>
-                <p>Nuestra esencia se resume en: "La leyenda continúa".</p>
-            </div>
+  <!-- BIO -->
+  <section id="bio" class="container">
+    <h2>Biografía</h2>
+    <div class="bio">
+      <div class="card">
+        <p>Invierno 85 es un proyecto musical de espíritu <strong>alegre, rockero y nostálgico</strong>, con repertorio versátil en inglés y español para todo tipo de eventos. La formación es flexible y se adapta a cada presentación.</p>
+        <p class="muted">Integrantes: rotativos (no fijos). No se muestran fotos individuales.</p>
+      </div>
+      <div class="card">
+        <ul>
+          <li><strong>Género/estilo:</strong> Versátil (inglés y español)</li>
+          <li><strong>Mensaje:</strong> La leyenda continúa — Grupo Invierno 85</li>
+          <li><strong>Ubicación:</strong> México</li>
+          <li><strong>Disponibilidad:</strong> Sí, para conciertos y eventos privados</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÚSICA & VIDEO -->
+  <section id="musica" class="container">
+    <h2>Música & Video</h2>
+    <p class="muted">Aún no hay canciones publicadas. Preparando canal de YouTube…</p>
+    <div class="music-wrap">
+      <div class="card">
+        <h3 style="margin-top:0">Video destacado</h3>
+        <div class="empty" id="videoBox">
+          <p style="margin:1rem;text-align:center">Coloca aquí el link de YouTube cuando esté listo.<br>
+            <small class="muted">Ejemplo de URL: https://www.youtube.com/watch?v=XXXXXXXX</small>
+          </p>
         </div>
-    </section>
-
-    <!-- Música -->
-    <section id="musica" class="music">
-        <div class="container">
-            <h2 class="fade-in">Música</h2>
-            <p class="fade-in">Próximamente podrás disfrutar de nuestro contenido musical aquí.</p>
-            <div class="video-container">
-                <div class="coming-soon">
-                    <i class="fas fa-music" style="font-size: 3rem; margin-bottom: 15px;"></i>
-                    <p>Video destacado próximamente</p>
-                </div>
-            </div>
+        <div style="display:flex;gap:.5rem;margin-top:.6rem">
+          <input id="ytUrl" type="url" placeholder="Pega enlace de YouTube" style="flex:1"/>
+          <button class="btn" onclick="embedVideo()">Insertar</button>
         </div>
-    </section>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Próximamente en plataformas</h3>
+        <div class="empty"><p style="margin:1rem;text-align:center">Spotify • Apple Music • YouTube Music</p></div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Galería de Fotos -->
-    <section id="fotos" class="gallery">
-        <div class="container">
-            <h2 class="fade-in">Galería</h2>
-            <div class="gallery-grid">
-                <!-- Fotos de presentaciones anteriores -->
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Presentación de Invierno 85">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Presentación de Invierno 85">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Presentación de Invierno 85">
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1571974599782-87624638275f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1931&q=80" alt="Presentación de Invierno 85">
-                </div>
-            </div>
+  <!-- FOTOS -->
+  <section id="fotos" class="container">
+    <h2>Galería</h2>
+    <p class="muted">Sube fotos de presentaciones anteriores. Puedes reemplazar los cuadros siguientes por tus imágenes.</p>
+    <div class="grid">
+      <div class="item g1"><div class="ph" title="Foto grande 1"></div></div>
+      <div class="item g2"><div class="ph" title="Foto 2"></div></div>
+      <div class="item g2"><div class="ph" title="Foto 3"></div></div>
+      <div class="item g2"><div class="ph" title="Foto 4"></div></div>
+      <div class="item g1"><div class="ph" title="Foto grande 5"></div></div>
+      <div class="item g2"><div class="ph" title="Foto 6"></div></div>
+      <div class="item g2"><div class="ph" title="Foto 7"></div></div>
+      <div class="item g2"><div class="ph" title="Foto 8"></div></div>
+    </div>
+  </section>
+
+  <!-- EVENTOS -->
+  <section id="eventos" class="container">
+    <h2>Próximos eventos</h2>
+    <div class="events">
+      <div class="event">
+        <div class="date"><span class="d">15</span><span class="m">NOV</span></div>
+        <div>
+          <div class="where">Gran Noche Retro — CDMX</div>
+          <div class="muted">Lugar por confirmar • 9:00 PM</div>
         </div>
-    </section>
-
-    <!-- Próximos Eventos -->
-    <section id="eventos" class="events">
-        <div class="container">
-            <h2 class="fade-in">Próximos Eventos</h2>
-            <div class="events-list">
-                <div class="event-item">
-                    <div class="event-date"><i class="far fa-calendar-alt"></i> 15 de Noviembre, 2023</div>
-                    <h3>Concierto en Vivo</h3>
-                    <p>Lugar: Auditorio Municipal</p>
-                    <p>Hora: 20:00 hrs</p>
-                </div>
-                <div class="event-item">
-                    <div class="event-date"><i class="far fa-calendar-alt"></i> 30 de Noviembre, 2023</div>
-                    <h3>Festival de Música Retro</h3>
-                    <p>Lugar: Parque Central</p>
-                    <p>Hora: 18:00 hrs</p>
-                </div>
-                <div class="event-item">
-                    <div class="event-date"><i class="far fa-calendar-alt"></i> 12 de Diciembre, 2023</div>
-                    <h3>Noche de Rock Clásico</h3>
-                    <p>Lugar: Club de Música Local</p>
-                    <p>Hora: 21:00 hrs</p>
-                </div>
-                <!-- Más eventos se agregarán aquí -->
-            </div>
+        <div style="margin-left:auto"><a class="btn secondary" href="#contacto">Solicitar info</a></div>
+      </div>
+      <div class="event">
+        <div class="date"><span class="d">30</span><span class="m">NOV</span></div>
+        <div>
+          <div class="where">Evento privado</div>
+          <div class="muted">Contrata a Invierno 85 para tu fiesta</div>
         </div>
-    </section>
+        <div style="margin-left:auto"><a class="btn secondary" href="https://wa.me/525528845182" target="_blank" rel="noopener">WhatsApp</a></div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Contacto -->
-    <section id="contacto" class="contact">
-        <div class="container">
-            <h2 class="fade-in">Contacto</h2>
-            <div class="contact-info fade-in">
-                <p>¿Te gustaría que Invierno 85 toque en tu evento?</p>
-                <p>Contáctanos para más información y disponibilidad:</p>
-                <p><i class="fas fa-phone"></i> Teléfono/WhatsApp: +52 55 2884 5182</p>
-            </div>
-            <div class="fade-in">
-                <a href="https://wa.me/525528845182" class="contact-button" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Enviar mensaje por WhatsApp
-                </a>
-            </div>
+  <!-- CONTACTO -->
+  <section id="contacto" class="container">
+    <h2>Contacto</h2>
+    <div class="contact-wrap">
+      <div class="card">
+        <p><strong>Contrataciones por WhatsApp:</strong> <a href="https://wa.me/525528845182" target="_blank" rel="noopener">+52 55 2884 5182</a></p>
+        <p class="muted">No hay correo electrónico registrado por ahora.</p>
+        <div style="margin:.8rem 0 1rem" class="social">
+          <a class="chip" href="#"><span class="dot"></span>Facebook</a>
+          <a class="chip" href="#"><span class="dot"></span>Instagram</a>
+          <a class="chip" href="#"><span class="dot"></span>TikTok</a>
+          <a class="chip" href="#"><span class="dot"></span>YouTube</a>
         </div>
-    </section>
+        <p class="help">¿Quieres que los mensajes lleguen con texto prellenado? Usa el formulario y abre WhatsApp:</p>
+        <form onsubmit="return sendWhatsApp()">
+          <input id="name" placeholder="Tu nombre" required>
+          <textarea id="msg" placeholder="Cuéntanos de tu evento (fecha, lugar, tipo de evento)" required></textarea>
+          <button class="btn primary" type="submit">Enviar a WhatsApp</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Detalles técnicos</h3>
+        <ul>
+          <li>Diseño responsivo (móvil y escritorio)</li>
+          <li>Secciones: Biografía, Música/Video, Fotos, Eventos y Contacto</li>
+          <li>Paleta: coral, fucsia, menta, negro, blanco/crema, metal</li>
+          <li>Fácil de publicar en cualquier hosting o GitHub Pages</li>
+        </ul>
+        <p class="muted">El logotipo se usa en la cabecera y en la portada. Puedes reemplazar el archivo <code>logoInvierno85.png</code> por una versión nueva cuando quieras.</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="logo">INVIERNO 85</div>
-            <p>La leyenda continúa</p>
-            <div class="social-links">
-                <!-- Enlaces a redes sociales - actualizar cuando estén disponibles -->
-                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
-            </div>
-            <p>&copy; 2023 Invierno 85. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap">
+      <div>© <span id="year"></span> Invierno 85. Todos los derechos reservados.</div>
+      <a class="btn secondary" href="#top">↑ Volver arriba</a>
+    </div>
+  </footer>
 
-    <script>
-        // Smooth scroll para navegación
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            });
-        });
+  <script>
+    // Año actual
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+    // Inserta video de YouTube
+    function embedVideo(){
+      const url = document.getElementById('ytUrl').value.trim();
+      if(!url) return;
+      const id = extractYouTubeID(url);
+      const box = document.getElementById('videoBox');
+      if(id){
+        box.innerHTML = `<iframe class="video" src="https://www.youtube.com/embed/${id}" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+      } else {
+        alert('No pude reconocer ese enlace de YouTube.');
+      }
+    }
+    function extractYouTubeID(u){
+      try{
+        const a = new URL(u);
+        if(a.hostname.includes('youtu.be')) return a.pathname.slice(1);
+        if(a.searchParams.get('v')) return a.searchParams.get('v');
+        const paths = a.pathname.split('/');
+        const idx = paths.indexOf('embed');
+        if(idx>-1) return paths[idx+1];
+      }catch(e){return null}
+      return null;
+    }
 
-        // Animaciones al hacer scroll
-        function checkVisibility() {
-            const elements = document.querySelectorAll('.fade-in, .video-container, .gallery-item, .event-item');
-            
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('visible');
-                }
-            });
-        }
-
-        // Inicializar animaciones
-        window.addEventListener('scroll', checkVisibility);
-        window.addEventListener('load', checkVisibility);
-    </script>
+    // Enviar a WhatsApp con texto
+    function sendWhatsApp(){
+      const name = document.getElementById('name').value.trim();
+      const msg = document.getElementById('msg').value.trim();
+      const phone = '525528845182';
+      const text = encodeURIComponent(`Hola, soy ${name}. Me interesa contratar a Invierno 85. Detalles: ${msg}`);
+      const url = `https://wa.me/${phone}?text=${text}`;
+      window.open(url,'_blank');
+      return false;
+    }
+  </script>
 </body>
 </html>
