@@ -342,7 +342,36 @@
             font-size: 0.9rem;
             color: var(--metallic-gray);
         }
-        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .logo-image {
+            width: 480px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .header-text {
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+
+            .logo-image {
+                width: 100px;
+            }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .logo {
@@ -364,12 +393,16 @@
 <body>
     <!-- Header -->
     <header>
-        <div class="container">
-            <h1 class="logo">INVIERNO 85</h1>
-            <p class="tagline">La leyenda continúa...</p>
-            <div class="decades">60's 70's 80's y algo más...</div>
-        </div>
+      <div class="container header-content">
+          <img src="logoInvierno85.png" alt="Logo Invierno 85" class="logo-image">
+          <div class="header-text">
+              <h1 class="logo">INVIERNO 85</h1>
+              <p class="tagline">La leyenda continúa...</p>
+              <div class="decades">60's 70's 80's y algo más...</div>
+          </div>
+      </div>
     </header>
+
 
     <!-- Navigation -->
     <div class="nav-container">
